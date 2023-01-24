@@ -1,4 +1,4 @@
-# Buidling a Realtime Chat App with Next.js, Ably, and Vercel
+# Building a Realtime Chat App with Next.js, Ably, and Vercel
 
 This is a demo of building a chat application with [Next.js](https://nextjs.org/) using Ably as the messaging platform.
 
