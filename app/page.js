@@ -1,9 +1,9 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
 const Chat = dynamic(() => import('../components/Chat'), {
   ssr: false,
-})
+});
 
 export default function Home() {
   return (
@@ -31,5 +31,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  )
+  );
 }
