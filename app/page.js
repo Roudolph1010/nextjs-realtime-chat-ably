@@ -1,9 +1,9 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
 const Chat = dynamic(() => import('../components/Chat'), {
   ssr: false,
-})
+});
 
 export default function Home() {
   return (
@@ -21,13 +21,15 @@ export default function Home() {
       <footer>
         Powered by
         <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
         and
         <a href="https://ably.com" rel="noopener noreferrer">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/ably-logo.svg" alt="Ably Logo" className="logo ably" />
         </a>
       </footer>
     </div>
-  )
+  );
 }
