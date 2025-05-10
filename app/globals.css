@@ -20,30 +20,17 @@ body {
   box-sizing: border-box;
 }
 
-[data-author='me'] {
-  background: linear-gradient(
-    to right,
-    #363795,
-    #005c97
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: white;
-  align-self: flex-end;
-  border-bottom-right-radius: 0 !important;
-  border-bottom-left-radius: 10px !important;
-}
-
 .container {
-  display: grid;
-  grid-template-rows: 1fr 100px;
   min-height: 100vh;
   background-color: #eee;
 }
 
 main {
-  display: grid;
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column;
   width: calc(100% - 40px);
-  max-width: 900px;
+  max-width: 960px;
+  height: calc(100vh - 40px);
   margin: 20px auto;
   border-radius: 10px;
   overflow: hidden;

@@ -1,15 +1,11 @@
 import Ably from 'ably';
 
-ensure Vercel doesn't cache the result of this route,
-as otherwise the token request data will eventually become outdated
-and we won't be able to authenticate on client side
 export const revalidate = 0;
 
 export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const clientId = searchParams.get('clientId') || `user-${Math.random().toString(36).slice(2, 7)}`;
   const client = new Ably.Rest(process.env.ABLY_API_KEY);
-  const tokenRequestData = await client.auth.createTokenRequest({
-    clientId: 'ably-nextjs-demo',
-  });
-  console.log(`Request: ${JSON.stringify(tokenRequestData)}`);
+  const tokenRequestData = await client.auth.createTokenRequest({ clientId });
   return Response.json(tokenRequestData);
 }
