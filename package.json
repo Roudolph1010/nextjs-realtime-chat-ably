@@ -22,5 +22,10 @@
     "eslint": "8.57.0",
     "eslint-config-next": "^13.4.19",
     "prettier": "^3.2.5"
+  },
+  "overrides": {
+    "rimraf": "^4.0.0",
+    "glob": "^9.0.0",
+    "inflight": "npm:lru-cache@^10.0.0"
   }
 }
