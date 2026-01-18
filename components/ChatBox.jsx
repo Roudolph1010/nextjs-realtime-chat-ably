@@ -55,23 +55,24 @@ export default function ChatBox({ clientId }) {
   }, [messages]);
 
   return (
-    <div className={styles.chatHolder}>
-      <div className={styles.chatText}>
+    <div className={styles.chatHolder} data-testid="chat-root">
+      <div className={styles.chatText} data-testid="message-list">
         {messages.map((message, index) => {
           const isMe = message.clientId === clientId;
           return (
             <div
               key={message.serial ?? index}
               className={`${styles.messageWrapper} ${isMe ? styles.me : styles.other}`}
+              data-testid="message-item"
             >
               {!isMe && (
-                <span className={styles.sender}>{message.clientId}</span>
+                <span className={styles.sender} data-testid="message-author">{message.clientId}</span>
               )}
-              <span className={styles.bubble} data-author={isMe ? 'me' : 'other'}>
+              <span className={styles.bubble} data-author={isMe ? 'me' : 'other'} data-testid="message-text">
                 {message.text}
               </span>
               {isMe && (
-                <span className={styles.sender}>{message.clientId}</span>
+                <span className={styles.sender} data-testid="message-author">{message.clientId}</span>
               )}
             </div>
           );
@@ -86,8 +87,9 @@ export default function ChatBox({ clientId }) {
           onChange={(e) => setMessageText(e.target.value)}
           onKeyPress={handleKeyPress}
           className={styles.textarea}
+          data-testid="message-input"
         />
-        <button type="submit" className={styles.button} disabled={messageTextIsEmpty}>
+        <button type="submit" className={styles.button} disabled={messageTextIsEmpty} data-testid="send-button">
           Send
         </button>
       </form>

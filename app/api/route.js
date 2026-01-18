@@ -3,6 +3,9 @@ import Ably from 'ably';
 export const revalidate = 0;
 
 export async function GET(request) {
+  if (!process.env.ABLY_API_KEY) {
+    return Response.json({ error: 'ABLY_API_KEY is not set. Add it to your .env file.' }, { status: 500 });
+  }
   const { searchParams } = new URL(request.url);
   const clientId = searchParams.get('clientId') || `user-${Math.random().toString(36).slice(2, 7)}`;
   const client = new Ably.Rest(process.env.ABLY_API_KEY);
