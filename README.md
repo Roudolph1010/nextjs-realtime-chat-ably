@@ -74,6 +74,54 @@ In order to deploy your new chat app to Vercel you'll need to:
 6. Watch your app deploy
 7. Visit the newly created URL in your browser!
 
+## Playwright test coverage
+
+This repo includes a Playwright end-to-end test suite that exercises real Ably connectivity - no mocks.
+
+### What is covered
+
+| Test | Why it matters |
+|------|---------------|
+| **Smoke - app loads** | Confirms the dynamic (CSR) chat component mounts and all key elements are visible |
+| **Single-user send** | Verifies the full send → render loop: message appears, input clears |
+| **Enter key send** | Asserts the keyboard shortcut works without a button click |
+| **Shift+Enter multiline** | Documents that Shift+Enter does NOT submit, allowing multiline input |
+| **Two-user realtime delivery** | Creates two isolated browser contexts (two Ably clients) and confirms pub/sub delivery from A → B |
+| **Presence - count increases** | Opens a second context and asserts the online count increments in the first user's panel |
+| **Presence - user appears in list** | Both users see at least one entry in the online users sidebar |
+
+### How to run locally
+
+```sh
+# 1. Ensure your .env file has a valid ABLY_API_KEY
+# 2. Install dependencies (includes Playwright)
+npm install
+
+# 3. Install Playwright's Chromium browser
+npx playwright install chromium
+
+# 4. Run the full suite (starts the Next.js dev server automatically)
+npm run test:e2e
+
+# Interactive UI mode - great for debugging
+npm run test:e2e:ui
+
+# Open the last HTML report
+npm run test:e2e:report
+```
+
+### How CI runs them
+
+The `.github/workflows/playwright.yml` workflow:
+1. Installs Node 20 and dependencies
+2. Installs Playwright's Chromium with OS-level deps (`--with-deps`)
+3. Runs `npm run test:e2e` with `ABLY_API_KEY` from repository secrets
+4. Uploads the Playwright HTML report as an artifact on failure (retained 7 days)
+
+Add your Ably API key as a repository secret named `ABLY_API_KEY` to enable CI runs.
+
+---
+
 ## Make it your own
 
 There are a few ways that this example could be extended:
